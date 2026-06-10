@@ -33,13 +33,15 @@ swiftc -O smart_pomodoro.swift -module-cache-path ./module_cache -Xcc -fmodules-
 ```
 
 #### Run in Background
-To kill any running instances and launch it in the background with a 25-minute default:
+To kill any running instances and launch it cleanly in the background (discarding logs to `/dev/null`):
 ```bash
 MINUTES="${1:-25}"
 
 pkill -f "smart_pomodoro"
-nohup ./smart_pomodoro "$MINUTES" > ./smart_pomodoro.log 2>&1 &
+nohup ./smart_pomodoro "$MINUTES" > /dev/null 2>&1 &
 ```
+
+*Note: Since this is a compiled binary, you can move `smart_pomodoro` anywhere on your system (e.g., `/usr/local/bin`) to run it from any folder.*
 
 ---
 
@@ -56,15 +58,10 @@ swiftc -O stopwatch_pomodoro.swift -module-cache-path ./module_cache -Xcc -fmodu
 ```
 
 #### Run in Background
-To kill any running instances and launch it in the background (does not require duration arguments):
+To kill any running instances and launch it cleanly in the background (does not require duration arguments):
 ```bash
 pkill -f "stopwatch_pomodoro"
-nohup ./stopwatch_pomodoro > ./stopwatch_pomodoro.log 2>&1 &
+nohup ./stopwatch_pomodoro > /dev/null 2>&1 &
 ```
 
----
-
-## Log Output
-You can monitor the application outputs by viewing their respective log files:
-- `smart_pomodoro.log`
-- `stopwatch_pomodoro.log`
+*Note: Since this is a compiled binary, you can move `stopwatch_pomodoro` anywhere on your system (e.g., `/usr/local/bin`) to run it from any folder.*
